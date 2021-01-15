@@ -11,6 +11,8 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import SuperheroDetail from './SuperheroDetail'
+
 const useStyles = makeStyles({
   headerCell: {
     color: 'blue',
@@ -18,8 +20,10 @@ const useStyles = makeStyles({
   },
 });
 
-const SimpleTable = () => {
+
+const SuperheroesTable = () => {
   const [rows, setRows] = useState([]);
+  const [selectedRow, setSelectedRow] = useState();
   const classes = useStyles();
 
   useEffect(() => {
@@ -45,7 +49,7 @@ const SimpleTable = () => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.name} hover={true} onClick={() => { setSelectedRow(row) }}>
               <TableCell component='th' scope='row'>
                 {row.name}
               </TableCell>
@@ -56,8 +60,9 @@ const SimpleTable = () => {
           ))}
         </TableBody>
       </Table>
+      { (selectedRow) ? (<SuperheroDetail superheroid={ selectedRow._id }/>) : null }
     </TableContainer>
   );
 };
 
-export default SimpleTable;
+export default SuperheroesTable;
