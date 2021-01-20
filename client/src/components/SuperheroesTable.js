@@ -11,6 +11,10 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import {
+  useHistory
+} from "react-router-dom";
+
 const useStyles = makeStyles({
   headerCell: {
     color: 'blue',
@@ -33,6 +37,8 @@ const SuperheroesTable = () => {
     getSuperheroes();
   }, []);
 
+  const history = useHistory()
+  
   return (
     <TableContainer component={Paper}>
       <Table aria-label='simple table'>
@@ -46,10 +52,8 @@ const SuperheroesTable = () => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name} hover={true} onClick={() => { console.log('Selecting hero', row) }}>
-              <TableCell component='th' scope='row'>
-                {row.name}
-              </TableCell>
+            <TableRow key={row.name} hover={true} onClick={() => { history.push('superhero-detail/' + row._id) }}>
+              <TableCell component='th' scope='row'>{row.name}</TableCell>
               <TableCell>{row.nickname}</TableCell>
               <TableCell>{row.alterego}</TableCell>
               <TableCell>{row.sidekick}</TableCell>
