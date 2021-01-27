@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('./dbAccess');
 const Schema = mongoose.Schema;
 
 const superheroSchema = new Schema({
