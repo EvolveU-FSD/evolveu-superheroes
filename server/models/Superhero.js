@@ -2,10 +2,13 @@ const mongoose = require('./dbAccess');
 const Schema = mongoose.Schema;
 
 const superheroSchema = new Schema({
-  name: String,
+  name: { type: String, required: true },
   nickname: String,
   alterego: String,
-  sidekick: String
+  sidekick: String,
+  age: Number
 });
 
-module.exports = mongoose.model('Superhero', superheroSchema, 'superhero');
+const Superhero = mongoose.model('Superhero', superheroSchema, 'superhero');
+
+module.exports = Superhero

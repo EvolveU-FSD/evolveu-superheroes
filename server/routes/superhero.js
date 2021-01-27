@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const mongoose = require('mongoose');
 const Superhero = require('../models/Superhero');
 
 /* List all superheroes. */
@@ -28,5 +27,17 @@ router.get('/:superheroid', async (req, res, next) => {
   }
 });
 
+router.post('/', async (req, res) => {
+  let superheroData = req.body
+
+  try {
+    let createdSuperhero = await Superhero.create(superheroData)
+    console.log(createdSuperhero)
+    res.send(createdSuperhero)  
+  }
+  catch (error) {
+    res.send(error)
+  }
+})
 
 module.exports = router;
