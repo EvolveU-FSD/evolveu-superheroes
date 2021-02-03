@@ -30,7 +30,7 @@ const LoginOrOut = ({ loggedInUser, login, logout }) => {
       <Button onClick={() => logout() }>Logout</Button>
     </>
     :
-    <Button onClick={() => login('tony', 'password123')}>Login</Button>
+    <Button onClick={() => login('tony', 'password')}>Login</Button>
 }
 
 const App = () => {
@@ -38,8 +38,28 @@ const App = () => {
 
   const login = (username, password) => {
     console.log('Logging in: ' + username)
-    // go establish the login session
-    setLoggedInUser({username, password})
+    fetch('/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'username='+username+'&password='+password,
+      credentials: 'include'
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json()
+      }
+      else {
+        throw new Error('Login failed!')
+      }
+    })
+    .then((user) => {
+      setLoggedInUser(user)
+    })
+    .catch((error) => {
+      console.log('Error trying to login: ', error)
+    })
   }
 
   const logout = () => {

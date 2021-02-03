@@ -1,10 +1,12 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 // IMPORT ROUTES
+var auth = require('./routes/auth');
 var indexRouter = require('./routes/index');
 var superheroRouter = require('./routes/superhero');
 
@@ -16,13 +18,17 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(session({ secret: "heros" }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(auth.passport.initialize());
+app.use(auth.passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // USE ROUTES
 app.use('/', indexRouter);
 app.use('/superhero', superheroRouter);
+app.use('/auth', auth.router);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
