@@ -1,7 +1,7 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 
-import { AppBar, Container, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Container, makeStyles, Toolbar, Typography, Button } from '@material-ui/core';
 import ShieldIcon from '@material-ui/icons/Security';
 
 import {
@@ -18,19 +18,47 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
+  title: {
+    flexGrow: 1,
+  },
 }));
 
+const LoginOrOut = ({ loggedInUser, login, logout }) => {
+  return (loggedInUser) ?
+    <>
+      <div>Hello, {loggedInUser.username}</div>
+      <Button onClick={() => logout() }>Logout</Button>
+    </>
+    :
+    <Button onClick={() => login('tony', 'password123')}>Login</Button>
+}
+
 const App = () => {
+  const [loggedInUser, setLoggedInUser] = useState()
+
+  const login = (username, password) => {
+    console.log('Logging in: ' + username)
+    // go establish the login session
+    setLoggedInUser({username, password})
+  }
+
+  const logout = () => {
+    console.log('Logging out!')
+    // go release the session
+    setLoggedInUser(undefined)
+  }
+
   const classes = useStyles();
   return (
     <>
       <Router>
-        <AppBar position='relative'>
+        <AppBar position='static'>
           <Toolbar>
             <ShieldIcon className={classes.icon} />
-            <Typography variant='h6' color='inherit' noWrap>
+            <Typography className={classes.title} variant='h6' color='inherit' noWrap>
               Super Heroes
             </Typography>
+            <LoginOrOut loggedInUser={loggedInUser} login={login} logout={logout}/>
           </Toolbar>
         </AppBar>
         <Container maxWidth='md'>
