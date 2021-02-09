@@ -1,0 +1,30 @@
+{
+  "name": "evolveu-superheroes",
+  "version": "1.0.0",
+  "description": "SUPERHEROES is a learning project, providing basic out-of-the-box capabilities for learners to build upon.",
+  "main": "index.js",
+  "dependencies": {
+    "passport": "^0.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "install-client": "cd client && npm install && cd ..",
+    "install-server": "cd server && npm install && cd ..",
+    "install": "npm run install-client && npm run install-server",
+    "build-client": "cd client && npm run build && cd ..",
+    "build": "npm run build-client",
+    "start": "cd server && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvolveU-FSD/evolveu-superheroes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvolveU-FSD/evolveu-superheroes/issues"
+  },
+  "homepage": "https://github.com/EvolveU-FSD/evolveu-superheroes#readme"
+}
