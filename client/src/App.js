@@ -78,7 +78,7 @@ const App = () => {
             <Typography className={classes.title} variant='h6' color='inherit' noWrap>
               Super Heroes
             </Typography>
-            {/* <LoginOrOut loggedInUser={loggedInUser} login={login} logout={logout}/> */}
+            <LoginOrOut loggedInUser={loggedInUser} login={login} logout={logout}/>
           </Toolbar>
         </AppBar>
         <Container maxWidth='md'>
