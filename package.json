@@ -13,7 +13,7 @@
     "install": "npm run install-client && npm run install-server",
     "build-client": "cd client && npm run build && cd ..",
     "build": "npm run build-client",
-    "start": "cd server && npm start",
+    "start": "cd server && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
